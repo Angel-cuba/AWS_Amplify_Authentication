@@ -6,9 +6,9 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import Input from '../components/CustomInput/Input';
-import Button from '../components/CustomButton/Button';
-import Logo from '../../assets/angel_Dev.png';
+import Input from '../../components/CustomInput/Input';
+import Button from '../../components/CustomButton/Button';
+import Logo from '../../../assets/angel_Dev.png';
 
 const SigInScreen = () => {
   const {height} = useWindowDimensions();

@@ -8,7 +8,7 @@
 
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import SigInScreen from './src/screens/SigInScreen';
+import SigInScreen from './src/screens/SignIn/SigInScreen';
 
 const App = () => {
   return (
