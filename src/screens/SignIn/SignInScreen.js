@@ -7,7 +7,8 @@ import {
 } from 'react-native';
 import React from 'react';
 import Input from '../../components/CustomInput/Input';
-import Button from '../../components/CustomButton/Button';
+import CustomButton from '../../components/CustomButton/CustomButton';
+import SocialSignInButton from '../../components/SocialButtons/SocialSignInButton';
 import Logo from '../../../assets/angel_Dev.png';
 
 const SigInScreen = () => {
@@ -22,15 +23,7 @@ const SigInScreen = () => {
   const onForgotPasswordPress = () => {
     console.warn('ForgotPassword');
   };
-  const onSignInWithFacebook = () => {
-    console.warn('SignInWithFacebook');
-  };
-  const onSignInWithGoogle = () => {
-    console.warn('SignInWithGoogle');
-  };
-  const onSignInWithApple = () => {
-    console.warn('SignInWithApple');
-  };
+
   const onDontHaveAccount = () => {
     console.warn('DontHaveAccount');
   };
@@ -49,31 +42,14 @@ const SigInScreen = () => {
           setValue={setPassword}
           secureTextEntry
         />
-        <Button text="Sign In" onPress={onSigInPress} />
-        <Button
+        <CustomButton text="Sign In" onPress={onSigInPress} />
+        <CustomButton
           text="ForgotPassword"
           onPress={onForgotPasswordPress}
           type="third"
         />
-        <Button
-          text="SignIn with Facebook"
-          onPress={onSignInWithFacebook}
-          bgColor="#E7EAF4"
-          fgColor="#4765A9"
-        />
-        <Button
-          text="SignIn with Google"
-          onPress={onSignInWithGoogle}
-          bgColor="#FAE9EA"
-          fgColor="#DD4D44"
-        />
-        <Button
-          text="SignIn with Apple"
-          onPress={onSignInWithApple}
-          bgColor="#e3e3e3"
-          fgColor="#363636"
-        />
-        <Button
+        <SocialSignInButton />
+        <CustomButton
           text="Don't have an account? SignUp"
           onPress={onDontHaveAccount}
           type="third"

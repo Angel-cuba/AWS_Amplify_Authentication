@@ -8,12 +8,14 @@
 
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import SigInScreen from './src/screens/SignIn/SigInScreen';
+import SignInScreen from './src/screens/SignIn';
+import SignUpScreen from './src/screens/SignUp';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.root}>
-      <SigInScreen />
+      {/* <SignInScreen /> */}
+      <SignUpScreen />
     </SafeAreaView>
   );
 };
