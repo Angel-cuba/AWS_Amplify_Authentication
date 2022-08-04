@@ -7,13 +7,7 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import SigInScreen from './src/screens/SigInScreen';
 
 const App = () => {
@@ -29,6 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: 'center',
     // justifyContent: 'center',
+    backgroundColor: '#FBFCFC',
   },
 });
 
