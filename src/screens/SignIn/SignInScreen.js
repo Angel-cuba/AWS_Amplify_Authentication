@@ -4,6 +4,7 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
+  Alert,
 } from 'react-native';
 import React from 'react';
 import Input from '../../components/CustomInput/Input';
@@ -12,15 +13,30 @@ import SocialSignInButton from '../../components/SocialButtons/SocialSignInButto
 import {useNavigation} from '@react-navigation/native';
 import Logo from '../../../assets/angel_Dev.png';
 
+//Amplify
+import {Auth} from 'aws-amplify';
+
 const SigInScreen = () => {
-  const [userName, setUserName] = React.useState('');
+  const [username, setUserName] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
 
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
 
-  const onSigInPress = () => {
-    navigation.navigate('Home');
+  const onSigInPress = async () => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    try {
+      const response = await Auth.signIn(username, password);
+      // navigation.navigate('Home');
+      console.log('response', response);
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
+    setLoading(false);
   };
   const onForgotPasswordPress = () => {
     navigation.navigate('ForgotPassword');
@@ -37,14 +53,24 @@ const SigInScreen = () => {
           style={[styles.logo, {height: height * 0.3}]}
           resizeMode="contain"
         />
-        <Input placeholder="Username" value={userName} setValue={setUserName} />
+        <Input placeholder="Username" value={username} setValue={setUserName} />
         <Input
           placeholder="Password"
           value={password}
           setValue={setPassword}
           secureTextEntry
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 5,
+              message: 'Password must be at least 5 characters',
+            },
+          }}
         />
-        <CustomButton text="Sign In" onPress={onSigInPress} />
+        <CustomButton
+          text={loading ? 'Loading...' : 'Sign In'}
+          onPress={onSigInPress}
+        />
         <CustomButton
           text="ForgotPassword"
           onPress={onForgotPasswordPress}
