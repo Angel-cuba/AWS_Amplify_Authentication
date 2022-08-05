@@ -11,11 +11,11 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import Navigation from './src/Navigation';
 //Amplify
 import Amplify from 'aws-amplify';
-import config from './src/aws-exports';
+import awsconfig from './src/aws-exports';
 // import {withAthenticator} from 'aws-amplify-react-native';
-import {withAuthenticator} from 'aws-amplify-react-native/dist/Auth';
+import {withAuthenticator, AmplifyTheme} from 'aws-amplify-react-native';
 
-Amplify.configure(config);
+Amplify.configure(awsconfig);
 
 const App = () => {
   return (
@@ -31,4 +31,48 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withAuthenticator(App);
+const signUpConfig = {
+  header: 'My Customized Sign Up',
+  hideAllDefaults: true,
+  signUpFields: [
+    {
+      label: 'Full name',
+      key: 'name',
+      required: true,
+      displayOrder: 1,
+      type: 'string',
+    },
+    {
+      label: 'Email',
+      key: 'email',
+      required: true,
+      displayOrder: 2,
+      type: 'string',
+    },
+    {
+      label: 'Username',
+      key: 'preferred_username',
+      required: true,
+      displayOrder: 3,
+      type: 'string',
+    },
+    {
+      label: 'Password',
+      key: 'password',
+      required: true,
+      displayOrder: 4,
+      type: 'password',
+    },
+  ],
+};
+
+const customTheme = {
+  ...AmplifyTheme,
+  button: {
+    ...AmplifyTheme.button,
+    backgroundColor: 'blue',
+    borderRadius: 10,
+  },
+};
+
+export default withAuthenticator(App, {signUpConfig, theme: customTheme});
