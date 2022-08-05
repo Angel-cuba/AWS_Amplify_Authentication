@@ -1,7 +1,6 @@
 import {View, StyleSheet, ScrollView, Text} from 'react-native';
 import React from 'react';
 import Input from '../../components/CustomInput/Input';
-import Button from '../../components/CustomButton/CustomButton';
 import SocialSignInButton from '../../components/SocialButtons/SocialSignInButton';
 import CustomButton from '../../components/CustomButton/CustomButton';
 
@@ -42,7 +41,7 @@ const SignUpScreen = () => {
           setValue={setConfirmPassword}
           secureTextEntry
         />
-        <Button text="Register" onPress={onRegisterPress} />
+        <CustomButton text="Register" onPress={onRegisterPress} />
         <Text style={styles.text}>
           By registering, you confirm that you accept our{' '}
           <Text style={styles.link} onPress={onTermsOfUsePress}>
