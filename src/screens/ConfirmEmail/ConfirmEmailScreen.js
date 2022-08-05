@@ -1,18 +1,30 @@
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
+import {View, StyleSheet, ScrollView, Text, Alert} from 'react-native';
 import React from 'react';
 import Input from '../../components/CustomInput/Input';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {Auth} from 'aws-amplify';
 
 const ConfirmEmailScreen = () => {
   const [code, setCode] = React.useState('');
   const navigation = useNavigation();
+  const routes = useRoute();
 
-  const onConfirmPress = () => {
-    navigation.navigate('Home');
+  const onConfirmPress = async () => {
+    try {
+      await Auth.confirmSignUp(routes.params.username, code);
+      navigation.navigate('Home');
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
   };
-  const onResendPress = () => {
-    console.warn('ResendPress');
+  const onResendPress = async () => {
+    try {
+      await Auth.resendSignUp(routes.params.username);
+      navigation.navigate('Home');
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
   };
   const onSignInPress = () => {
     navigation.navigate('SignIn');
@@ -21,6 +33,7 @@ const ConfirmEmailScreen = () => {
     <ScrollView>
       <View style={styles.root}>
         <Text style={styles.title}>Confirm email</Text>
+        <Input value={routes?.params?.username} />
         <Input
           placeholder="Enter your confirmation code"
           value={code}

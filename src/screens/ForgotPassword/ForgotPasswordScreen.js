@@ -1,16 +1,22 @@
-import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, Alert} from 'react-native';
 import React from 'react';
 import Input from '../../components/CustomInput/Input';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import {Auth} from 'aws-amplify';
 
 const ForgotPasswordScreen = () => {
   const [username, setUserName] = React.useState('');
 
   const navigation = useNavigation();
 
-  const onConfirmPress = () => {
-    navigation.navigate('NewPassword');
+  const onConfirmPress = async () => {
+    try {
+      await Auth.forgotPassword(username);
+      navigation.navigate('NewPassword');
+    } catch (error) {
+      Alert.alert('Oops', error.message);
+    }
   };
   const onSignInPress = () => {
     navigation.navigate('SignIn');
