@@ -1,20 +1,36 @@
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
+import {View, StyleSheet, ScrollView, Text, Alert} from 'react-native';
 import React from 'react';
 import Input from '../../components/CustomInput/Input';
 import SocialSignInButton from '../../components/SocialButtons/SocialSignInButton';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import {useNavigation} from '@react-navigation/native';
+import {Auth} from 'aws-amplify';
 
 const SignUpScreen = () => {
-  const [userName, setUserName] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [username, setUserName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
 
   const navigation = useNavigation();
 
-  const onRegisterPress = () => {
-    navigation.navigate('ConfirmEmail');
+  const onRegisterPress = async () => {
+    // navigation.navigate('ConfirmEmail');
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+          name,
+          preferred_username: username,
+        },
+      });
+      navigation.navigate('ConfirmEmail', {username});
+    } catch (error) {
+      Alert.alert('Hei...', error.message);
+    }
   };
   const onTermsOfUsePress = () => {
     console.warn('SignInWithFacebook');
@@ -30,7 +46,8 @@ const SignUpScreen = () => {
     <ScrollView>
       <View style={styles.root}>
         <Text style={styles.title}>Create Account</Text>
-        <Input placeholder="Username" value={userName} setValue={setUserName} />
+        <Input placeholder="Name" value={name} setValue={setName} />
+        <Input placeholder="Username" value={username} setValue={setUserName} />
         <Input placeholder="Email" value={email} setValue={setEmail} />
         <Input
           placeholder="Password"
