@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-authentication-staging-95218-authRole",
+      "UnauthRoleArn": "arn:aws:iam::391622764556:role/amplify-authentication-staging-95218-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::391622764556:role/amplify-authentication-staging-95218-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-authentication-staging-95218-deployment",
+      "UnauthRoleName": "amplify-authentication-staging-95218-unauthRole",
+      "StackName": "amplify-authentication-staging-95218",
+      "StackId": "arn:aws:cloudformation:us-east-2:391622764556:stack/amplify-authentication-staging-95218/4b92d720-14a4-11ed-8370-06e081be8bca",
+      "AmplifyAppId": "d2jcek72x0ikoo"
+    },
+    "categories": {
+      "auth": {
+        "Authentication": {}
+      }
+    }
+  }
+}
