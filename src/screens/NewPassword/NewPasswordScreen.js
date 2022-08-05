@@ -2,16 +2,19 @@ import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import React from 'react';
 import Input from '../../components/CustomInput/Input';
 import CustomButton from '../../components/CustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 const NewPasswordScreen = () => {
   const [code, setCode] = React.useState('');
   const [newPassword, setNewPassword] = React.useState('');
 
+  const navigation = useNavigation();
+
   const onSubmitPress = () => {
-    console.warn('SubmitPress');
+    navigation.navigate('Home');
   };
   const onSignInPress = () => {
-    console.warn('SignIn');
+    navigation.navigate('SignIn');
   };
   return (
     <ScrollView>
@@ -27,7 +30,6 @@ const NewPasswordScreen = () => {
         />
 
         <CustomButton text="Confirm" onPress={onSubmitPress} />
-
         <CustomButton
           text="Back to Sign in"
           onPress={onSignInPress}

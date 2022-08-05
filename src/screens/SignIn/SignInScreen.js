@@ -9,23 +9,25 @@ import React from 'react';
 import Input from '../../components/CustomInput/Input';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import SocialSignInButton from '../../components/SocialButtons/SocialSignInButton';
+import {useNavigation} from '@react-navigation/native';
 import Logo from '../../../assets/angel_Dev.png';
 
 const SigInScreen = () => {
-  const {height} = useWindowDimensions();
-
   const [userName, setUserName] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  const {height} = useWindowDimensions();
+  const navigation = useNavigation();
+
   const onSigInPress = () => {
-    console.warn('SigIn');
+    navigation.navigate('Home');
   };
   const onForgotPasswordPress = () => {
-    console.warn('ForgotPassword');
+    navigation.navigate('ForgotPassword');
   };
 
   const onDontHaveAccount = () => {
-    console.warn('DontHaveAccount');
+    navigation.navigate('SignUp');
   };
   return (
     <ScrollView>
