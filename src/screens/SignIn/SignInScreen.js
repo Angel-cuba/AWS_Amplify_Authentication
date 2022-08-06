@@ -31,7 +31,6 @@ const SigInScreen = () => {
     setLoading(true);
     try {
       const response = await Auth.signIn(username, password);
-      // navigation.navigate('Home');
       console.log('response', response);
     } catch (error) {
       Alert.alert('Oops', error.message);
